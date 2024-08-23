@@ -7,11 +7,14 @@ import { HomeComponent } from './components/home/home.component'; // example of 
 import { ProfileComponent } from './components/profile/profile.component'; // another example
 import { ArticleComponent } from './components/article/article.component';
 import { LayoutAuthComponent } from './components/layout-auth/layout-auth.component';
+import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {authGuard} from "./guards/auth.guard";
+import {logoutGuard} from "./guards/logout.guard";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
   {
-    path: '', component: LayoutAuthComponent,
+    path: '', component: LayoutAuthComponent, canActivate: [logoutGuard],
     children: [
         {path: 'login', component: LoginComponent},
         {path: 'register', component: RegisterComponent}
@@ -19,14 +22,13 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: LayoutComponent,
+    component: LayoutComponent, canActivate: [authGuard],
     children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'article', component: ArticleComponent },
-      // add more child routes as needed
     ]
   },
-  { path: '**', redirectTo: 'home' } // wildcard route to redirect to 'home' or another default path
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

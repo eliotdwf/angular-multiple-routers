@@ -1,2 +1,8 @@
-ma toolbox sans liens
 <p>login works!</p>
+<p>Statut : {{authService.isLoggedIn() ? 'Logged in' : 'Logged out'}}</p>
+<button mat-raised-button color="primary" (click)="login()">Login</button>
+<p>
+  <a routerLink="/profile">Profile</a>
+</p>
+
+
