@@ -24,8 +24,8 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent, canActivate: [authGuard],
     children: [
-      { path: 'profile', component: ProfileComponent },
       { path: 'article', component: ArticleComponent },
+      { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
     ]
   },
   { path: '**', component: PageNotFoundComponent }
